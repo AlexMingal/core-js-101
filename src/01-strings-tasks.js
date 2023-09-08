@@ -18,8 +18,8 @@
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
  */
-function concatenateStrings(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function concatenateStrings(a, b) {
+  return a + b;
 }
 
 
@@ -34,8 +34,8 @@ function concatenateStrings(/* value1, value2 */) {
  *   'b'     => 1
  *   ''      => 0
  */
-function getStringLength(/* value */) {
-  throw new Error('Not implemented');
+function getStringLength(str) {
+  return str.length;
 }
 
 /**
@@ -51,8 +51,8 @@ function getStringLength(/* value */) {
  *   'John','Doe'      => 'Hello, John Doe!'
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -65,8 +65,8 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(val) {
+  return val.slice(7, val.length - 1);
 }
 
 
@@ -80,8 +80,8 @@ function extractNameFromTemplate(/* value */) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-function getFirstChar(/* value */) {
-  throw new Error('Not implemented');
+function getFirstChar(str) {
+  return str[0];
 }
 
 /**
@@ -95,8 +95,14 @@ function getFirstChar(/* value */) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(/* value */) {
-  throw new Error('Not implemented');
+function removeLeadingAndTrailingWhitespaces(str) {
+  // const arr = str.split('');
+  // do {
+  //   if (arr[0] === ' ' || arr.join('')[0] === '\t') { arr.shift(); }
+  //   if (arr[arr.length - 1] === ' ') { arr.pop(''); }
+  // } while ((arr[0] === ' ') || (arr[arr.length - 1] === ' '));
+  // return arr.join('');
+  return str.trim();
 }
 
 /**
@@ -110,8 +116,8 @@ function removeLeadingAndTrailingWhitespaces(/* value */) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(/* value, count */) {
-  throw new Error('Not implemented');
+function repeatString(val, count) {
+  return val.repeat(count);
 }
 
 /**
@@ -126,8 +132,11 @@ function repeatString(/* value, count */) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  let res = '';
+  res = str.replace(value, '');
+
+  return res;
 }
 
 /**
@@ -141,8 +150,8 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.slice(1, str.length - 1);
 }
 
 
@@ -156,8 +165,8 @@ function unbracketTag(/* str */) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(/* str */) {
-  throw new Error('Not implemented');
+function convertToUpperCase(str) {
+  return str.toUpperCase();
 }
 
 /**
@@ -175,8 +184,8 @@ function convertToUpperCase(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -202,8 +211,26 @@ function extractEmails(/* str */) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let res = '';
+  let char = '';
+
+  for (let i = 0; i < height; i += 1) {
+    for (let k = 0; k < width; k += 1) {
+      if (i === 0 && k === 0) { char = '┌'; }
+      if (i === 0 && k !== 0) { char = '─'; }
+      if (k === 0 && i !== 0) { char = '│'; }
+      if (k !== 0 && i !== 0) { char = ' '; }
+      if (k === width - 1 && i === 0) { char = '┐'; }
+      if (k === width - 1 && i !== 0) { char = '│'; }
+      if (k === 0 && i === height - 1) { char = '└'; }
+      if (k !== 0 && i === height - 1) { char = '─'; }
+      if (k === width - 1 && i === height - 1) { char = '┘'; }
+      res += char;
+    }
+    res += '\n';
+  }
+  return res;
 }
 
 
@@ -223,9 +250,22 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const arr = [];
+  let n;
+  for (let i = 0; i < str.length; i += 1) {
+    n = str.charCodeAt(i);
+    if (n > 64 && n < 123) {
+      if (n < 96 && n > 80) { n -= 26; }
+      if (n > 109) { n -= 26; }
+      arr.push(String.fromCharCode(n + 13));
+    } else {
+      arr.push(String.fromCharCode(n));
+    }
+  }
+  return arr.join('');
 }
+
 
 /**
  * Returns true if the value is string; otherwise false.
@@ -240,8 +280,9 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  if (typeof value === 'string' || value instanceof String) { return true; }
+  return false;
 }
 
 
@@ -269,8 +310,38 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(card) {
+  const c1 = card[card.length - 1];
+  const c0 = card.slice(0, -1);
+  let base;
+  let pos;
+
+  switch (c1) {
+    case '♣': base = 0;
+      break;
+    case '♦': base = 13;
+      break;
+    case '♥': base = 26;
+      break;
+    case '♠': base = 39;
+      break;
+    default: base = 0;
+  }
+
+  switch (c0) {
+    case 'A': pos = 0;
+      break;
+    case 'J': pos = 10;
+      break;
+    case 'Q': pos = 11;
+      break;
+    case 'K': pos = 12;
+      break;
+    default:
+      pos = Number(c0) - 1;
+  }
+
+  return pos + base;
 }
 
 
