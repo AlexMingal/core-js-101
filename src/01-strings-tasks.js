@@ -256,7 +256,7 @@ function encodeToRot13(str) {
   for (let i = 0; i < str.length; i += 1) {
     n = str.charCodeAt(i);
     if (n > 64 && n < 123) {
-      if (n < 96 && n > 80) { n -= 26; }
+      if (n < 91 && n > 77) { n -= 26; }
       if (n > 109) { n -= 26; }
       arr.push(String.fromCharCode(n + 13));
     } else {
